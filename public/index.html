@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Agenda de Consultas</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.css" />
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+<div class="app">
+  <header class="topbar">
+    <h1>Agenda de Consultas</h1>
+    <div class="topbar-status" id="whatsappStatus">Verificando WhatsApp...</div>
+    <button class="btn btn-primary" id="newAppointmentBtn">+ Nueva cita</button>
+  </header>
+
+  <main class="content">
+    <div id="calendar"></div>
+  </main>
+</div>
+
+<!-- Modal: crear / editar cita -->
+<div class="modal-overlay" id="modalOverlay">
+  <div class="modal">
+    <div class="modal-header">
+      <h2 id="modalTitle">Nueva cita</h2>
+      <button class="modal-close" id="modalClose">&times;</button>
+    </div>
+
+    <form id="appointmentForm">
+      <input type="hidden" id="appointmentId" />
+
+      <label>Nombre del paciente
+        <input type="text" id="patientName" required placeholder="Ej. Ana García" />
+      </label>
+
+      <label>Teléfono (WhatsApp)
+        <input type="tel" id="patientPhone" required placeholder="Ej. 5512345678" />
+        <small>Incluye lada si no es de México (52). Solo dígitos.</small>
+      </label>
+
+      <div class="row">
+        <label>Fecha
+          <input type="date" id="apptDate" required />
+        </label>
+        <label>Hora
+          <input type="time" id="apptTime" required />
+        </label>
+        <label>Duración (min)
+          <input type="number" id="apptDuration" min="5" step="5" value="30" required />
+        </label>
+      </div>
+
+      <label>Motivo de consulta
+        <input type="text" id="apptReason" placeholder="Ej. Consulta general" />
+      </label>
+
+      <label>Notas internas
+        <textarea id="apptNotes" rows="3" placeholder="Notas privadas, no se envían por WhatsApp"></textarea>
+      </label>
+
+      <div class="whatsapp-preview" id="whatsappPreview"></div>
+
+      <div class="modal-actions">
+        <button type="button" class="btn btn-danger" id="cancelAppointmentBtn" style="display:none;">Cancelar cita</button>
+        <button type="button" class="btn btn-secondary" id="resendWhatsappBtn" style="display:none;">Reenviar WhatsApp</button>
+        <div class="spacer"></div>
+        <button type="button" class="btn btn-ghost" id="closeFormBtn">Cerrar</button>
+        <button type="submit" class="btn btn-primary" id="saveBtn">Guardar y confirmar por WhatsApp</button>
+      </div>
+
+      <div class="form-message" id="formMessage"></div>
+    </form>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/index.global.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fullcalendar/6.1.15/locales-all.global.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
